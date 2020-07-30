@@ -41,7 +41,7 @@ var svg = d3.select("#dv")
 d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", function(error,data) {
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([0, 12000])
+    .domain([0, 500000])
     .range([ 0, width ]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -49,7 +49,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([35, 90])
+    .domain([0, 20000])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
