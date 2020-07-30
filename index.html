@@ -48,7 +48,6 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
   var y_axis = d3.axisLeft(y).ticks(3).tickFormat(d3.format(".0s"));  	
     
   svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
     .call(y_axis);
 
   // Add dots
