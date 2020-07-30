@@ -52,7 +52,13 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
   //svg.append("g")
     //.attr("transform", "translate(0," + height + ")")
     //call(d3.axisBottom(x));
-
+  svg.append("text")
+      .attr("transform",
+            "translate(" + (width/2) + " ," + 
+                           (height + margin.top) + ")")
+      .style("text-anchor", "middle")
+	    .style("font", "20px times")
+      .text("Confirmed Cases");
   // Add Y axis
   var y = d3.scaleLog()
     .domain([1, 20000])
@@ -62,7 +68,14 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     
   svg.append("g")
     .call(y_axis);
-
+  svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", margin.left - margin.left - margin.right)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+	    .style("font", "20px times")
+      .text("Total Deaths")
   // Add dots
   svg.append('g')
     .selectAll("dot")
