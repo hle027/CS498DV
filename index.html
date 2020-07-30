@@ -82,7 +82,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
   var z = d3.scaleSqrt()
     .domain([100, 4500000])
     .range([ 5, 40]); 
-  
+  var State = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virgin Islands", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
   var Color = d3.scaleOrdinal()
     .domain(["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virgin Islands", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"])
     .range(["#046e0e", "#6f18ff", "#b91346", "#0c5fab", "#ab049f", "#695c4f", "#944b01", "#0b50e2", "#8f4477", "#636105", "#be0e02", "#01677c", "#0d6b4e", "#7249ab", "#924844", "#8a27ce", "#b50972", "#605a7d", "#a9362a", "#7d5727", "#1458c6", "#506534", "#4e3df0", "#9d318b", "#a6325e", "#645497", "#805063", "#3c665c", "#6944c7", "#8f30b2", "#2f6190", "#2f6b2b", "#416901", "#565f69", "#ab3508", "#bc102c", "#914b28", "#a63745", "#834691", "#6a5e34", "#8617e3", "#7e5543", "#9e13b9", "#994157", "#633edb", "#7a5909", "#576248", "#3b59b2", "#3f50cd", "#7b4f7d", "#8f399e",, "#FDAE61", "#F46D43", "#66C2A5", "#1BDDF4"]);
@@ -144,23 +144,23 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
 //})
   var size = 20
   svg.selectAll("mydots")
-  .data(d.state)
+  .data(State)
   .enter()
   .append("rect")
     .attr("x", 100)
     .attr("y", function(d,i){ return 100 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
     .attr("width", size)
     .attr("height", size)
-    .style("fill", function(d){ return Color(d.state)})
+    .style("fill", function(d){ return Color(d)})
 
 // Add one dot in the legend for each name.
   svg.selectAll("mylabels")
-  .data(d.state)
+  .data(State)
   .enter()
   .append("text")
     .attr("x", 100 + size*1.2)
     .attr("y", function(d,i){ return 100 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
-    .style("fill", function(d){ return Color(d.state)})
+    .style("fill", function(d){ return Color(d)})
     .text(function(d){ return d})
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
