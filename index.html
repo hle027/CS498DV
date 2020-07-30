@@ -37,8 +37,8 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/4_ThreeNum.csv", function(data) {
-
+//d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/4_ThreeNum.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", function(data) {
   // Add X axis
   var x = d3.scaleLinear()
     .domain([0, 12000])
@@ -61,11 +61,12 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
   // Add a scale for bubble color
   var myColor = d3.scaleOrdinal()
-    .domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
+    //.domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
+    .domain(d.state)
     .range(d3.schemeSet2);
 
   // -1- Create a tooltip div that is hidden by default:
-  var tooltip = d3.select("#my_dataviz")
+  var tooltip = d3.select("#dv")
     .append("div")
       .style("opacity", 0)
       .attr("class", "tooltip")
@@ -81,7 +82,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
       .duration(200)
     tooltip
       .style("opacity", 1)
-      .html("Country: " + d.country)
+      .html("State: " + d.state)
       .style("left", (d3.mouse(this)[0]+30) + "px")
       .style("top", (d3.mouse(this)[1]+30) + "px")
   }
@@ -104,10 +105,10 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
     .enter()
     .append("circle")
       .attr("class", "bubbles")
-      .attr("cx", function (d) { return x(d.gdpPercap); } )
-      .attr("cy", function (d) { return y(d.lifeExp); } )
+      .attr("cx", function (d) { return x(d.cases); } )
+      .attr("cy", function (d) { return y(d.deaths); } )
       .attr("r", function (d) { return z(d.pop); } )
-      .style("fill", function (d) { return myColor(d.continent); } )
+      .style("fill", function (d) { return myColor(d.state); } )
     // -3- Trigger the functions
     .on("mouseover", showTooltip )
     .on("mousemove", moveTooltip )
