@@ -42,7 +42,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
 
   // Add Y axis
   var y = d3.scaleLog()
-    .domain([20, 20000])
+    .domain([10, 20000])
     .range([ height, 0]);
     
   var y_axis = d3.axisLeft(y).ticks(3).tickFormat(d3.format(".0s"));  	
