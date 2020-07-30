@@ -61,7 +61,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
 
   // Add a scale for bubble color
   var myColor = d3.scaleOrdinal()
-    .domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
+    //.domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
     .domain(d.state)
     .range(d3.schemeSet2);
 
