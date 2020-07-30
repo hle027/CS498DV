@@ -153,16 +153,17 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
   legend.append("rect")
-  .attr("x", 0)
+  .attr("x", 100)
   .attr("y", function(d,i){ return 100 + i*(size+5)})
   .attr("width", size)
   .attr("height", size)
   .style("fill", function(d){ return Color(d)})
 
   legend.append("text")
-  .attr("x", 0)
+  .attr("x", 100 + size*1.2)
   .attr("y", function(d,i){ return 100 + i*(size+5) + (size/2)})
   .attr("dy", ".35em")
+  .style("fill", function(d){ return Color(d)})
   .style("text-anchor", "end")
   .text(function(d) { return d; });
   
