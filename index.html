@@ -28,7 +28,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
 
   // Add X axis
   var x = d3.scaleLog()
-    .domain([10, 1000000])
+    .domain([20, 1000000])
     .range([ 0, width ]);
     
   var x_axis = d3.axisBottom(x).ticks(5).tickFormat(d3.format(".0s")); 
