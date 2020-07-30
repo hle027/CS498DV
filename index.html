@@ -83,23 +83,69 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     .domain([100, 4500000])
     .range([ 5, 40]); 
   
-  var myColor = d3.scaleOrdinal()
+  var Color = d3.scaleOrdinal()
     .domain(["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virgin Islands", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"])
     .range(["#046e0e", "#6f18ff", "#b91346", "#0c5fab", "#ab049f", "#695c4f", "#944b01", "#0b50e2", "#8f4477", "#636105", "#be0e02", "#01677c", "#0d6b4e", "#7249ab", "#924844", "#8a27ce", "#b50972", "#605a7d", "#a9362a", "#7d5727", "#1458c6", "#506534", "#4e3df0", "#9d318b", "#a6325e", "#645497", "#805063", "#3c665c", "#6944c7", "#8f30b2", "#2f6190", "#2f6b2b", "#416901", "#565f69", "#ab3508", "#bc102c", "#914b28", "#a63745", "#834691", "#6a5e34", "#8617e3", "#7e5543", "#9e13b9", "#994157", "#633edb", "#7a5909", "#576248", "#3b59b2", "#3f50cd", "#7b4f7d", "#8f399e",, "#FDAE61", "#F46D43", "#66C2A5", "#1BDDF4"])
 	
-	
-	
-	
-	// Add dots
+  var tooltip = d3.select("#plot")
+    .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "black")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("color", "white")
+
+  // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
+  var showTooltip = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+    tooltip
+      .style("opacity", 1)
+      .html("State: " + d.state)
+      .style("left", (d3.mouse(this)[0]+30) + "px")
+      .style("top", (d3.mouse(this)[1]+30) + "px")
+  }
+  var moveTooltip = function(d) {
+    tooltip
+      .style("left", (d3.mouse(this)[0]+30) + "px")
+      .style("top", (d3.mouse(this)[1]+30) + "px")
+  }
+  var hideTooltip = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
+  }
+
+  // Add dots
   svg.append('g')
     .selectAll("dot")
     .data(data)
     .enter()
     .append("circle")
+      .attr("class", "bubbles")
       .attr("cx", function (d) { return x(d.cases); } )
       .attr("cy", function (d) { return y(d.deaths); } )
-      .attr("r", 5)
-      .style("fill", "#69b3a2")
+      //.attr("r", function (d) { return z(d.pop); } )
+      .style("fill", function (d) { return Color(d.state); } )
+    // -3- Trigger the functions
+    .on("mouseover", showTooltip )
+    .on("mousemove", moveTooltip )
+    .on("mouseleave", hideTooltip )	
+	
+	
+	// Add dots
+ // svg.append('g')
+   // .selectAll("dot")
+   // .data(data)
+   // .enter()
+  //  .append("circle")
+    //  .attr("cx", function (d) { return x(d.cases); } )
+    //  .attr("cy", function (d) { return y(d.deaths); } )
+    //  .attr("r", 5)
+    //  .style("fill", "#69b3a2")
 
 })
 
