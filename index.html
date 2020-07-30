@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-
+<head>
 <meta charset="utf-8">
 
 <script src="https://d3js.org/d3.v4.js"></script>
 
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-<head>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -39,13 +39,34 @@ $(document).ready(function(){
   height: 1500px;
   background-color: white;
 <body>
-<h1>Data Visualization - Final Project</h1>
+#section2 {
+  height: 1500px;
+  background-color: yellow;
+}
+</style>
+</head>	
+<body>
 	
-<div class="a">
+<h1>Smooth Scroll</h1>
+
+<div class="main" id="section1">
+  <h2>Section 1</h2>
+  <p>Click on the link to see the "smooth" scrolling effect.</p>
+  <a href="#section2">Click Me to Smooth Scroll to Section 2 Below</a>
+  <p>Note: Remove the scroll-behavior property to remove smooth scrolling.</p>
+</div>
+
+<div class="main" id="section2">
+  <h2>Section 2</h2>
+  <a href="#section1">Click Me to Smooth Scroll to Section 1 Above</a>
+</div>
+</body>
+	
+<div class="a", id = "section1">
 <p><b>Covid-19 Cases in the US</b></p>
 </div>
 <!-- Create a div where the graph will take place -->
-<div id="plot"></div>
+<div id="section1"></div>
 
 <style>
 .bubbles {
@@ -65,7 +86,7 @@ var margin = {top: 40, right: 80, bottom: 100, left: 200},
     height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#plot")
+var svg = d3.select("#section1")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -122,7 +143,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     .domain(["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virgin Islands", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"])
     .range(["#046e0e", "#6f18ff", "#b91346", "#0c5fab", "#ab049f", "#695c4f", "#944b01", "#0b50e2", "#8f4477", "#636105", "#be0e02", "#01677c", "#0d6b4e", "#7249ab", "#924844", "#8a27ce", "#b50972", "#605a7d", "#a9362a", "#7d5727", "#1458c6", "#506534", "#4e3df0", "#9d318b", "#a6325e", "#645497", "#805063", "#3c665c", "#6944c7", "#8f30b2", "#2f6190", "#2f6b2b", "#416901", "#565f69", "#ab3508", "#bc102c", "#914b28", "#a63745", "#834691", "#6a5e34", "#8617e3", "#7e5543", "#9e13b9", "#994157", "#633edb", "#7a5909", "#576248", "#3b59b2", "#3f50cd", "#7b4f7d", "#8f399e",, "#FDAE61", "#F46D43", "#66C2A5", "#1BDDF4"]);
 	
-  var tooltip = d3.select("#plot")
+  var tooltip = d3.select("#section1")
     .append("div")
       .style("opacity", 0)
       .attr("class", "tooltip")
@@ -235,35 +256,13 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     //  .style("fill", "#69b3a2")
 
 })
-}
+	
 
-#section2 {
-  height: 600px;
-  background-color: yellow;
-}
-</style>
-</head>
-<body>
 
-<h1>Smooth Scroll</h1>
-
-<div class="main" id="section1">
-  <h2>Section 1</h2>
-  <p>Click on the link to see the "smooth" scrolling effect.</p>
-  <a href="#section2">Click Me to Smooth Scroll to Section 2 Below</a>
-  <p>Note: Remove the scroll-behavior property to remove smooth scrolling.</p>
-</div>
-
-<div class="main" id="section2">
-  <h2>Section 2</h2>
-  <a href="#section1">Click Me to Smooth Scroll to Section 1 Above</a>
-</div>
-
+</script>
 </body>
 </html>
 
 
 
-</script>
-</body>
-</html>	
+
