@@ -30,9 +30,12 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
   var x = d3.scaleLog()
     .domain([100, 1000000])
     .range([ 0, width ]);
+  var x_axis = d3.axisBottom(x).ticks(4).tickFormat(d3.format(".0s"));  	
   svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
+    .call(x_axis);
+  //svg.append("g")
+    //.attr("transform", "translate(0," + height + ")")
+    .//call(d3.axisBottom(x));
 
   // Add Y axis
   var y = d3.scaleLog()
