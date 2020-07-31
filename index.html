@@ -185,18 +185,13 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
 	
 <script>
 
-
-//var data2 = [
-  // {ser1: 1, ser2: 7},
- //  {ser1: 4, ser2: 1},
- //  {ser1: 6, ser2: 8}
-//];
-
 // set the dimensions and margins of the graph
-//var margin = {top: 10, right: 30, bottom: 30, left: 50},
-    //width = 460 - margin.left - margin.right,
-   // height = 400 - margin.top - margin.bottom;
-var svg2 = d3.select("#section2")
+//var margin = {top: 10, right: 30, bottom: 30, left: 60},
+   // width = 460 - margin.left - margin.right,
+    //height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg2 = d3.select("#selection2")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -205,27 +200,33 @@ var svg2 = d3.select("#section2")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", function(d) {
-return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases },
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
 
- function(data) {
+  // When reading the csv, I must format variables:
+  function(d){
+    return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
+  },
 
-    / var x = d3.scaleTime()
+  // Now I can use this dataset:
+  function(data) {
+
+    // Add X axis --> it is a date format
+    var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.date; }))
       .range([ 0, width ]);
     xAxis = svg2.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
-     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.cases; })])
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain([0, d3.max(data, function(d) { return +d.value; })])
       .range([ height, 0 ]);
     yAxis = svg2.append("g")
       .call(d3.axisLeft(y));
 
- 
-  var bisect = d3.bisector(function(d) { return d.date; }).left;
-  var clip = svg2.append("defs").append("svg:clipPath")
+    // Add a clipPath: everything out of this area won't be drawn.
+    var clip = svg2.append("defs").append("svg:clipPath")
         .attr("id", "clip")
         .append("svg:rect")
         .attr("width", width )
@@ -251,7 +252,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases },
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.caes) })
+        .y(function(d) { return y(d.value) })
         )
 
     // Add the brushing
@@ -287,7 +288,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases },
           .duration(1000)
           .attr("d", d3.line()
             .x(function(d) { return x(d.date) })
-            .y(function(d) { return y(d.cases) })
+            .y(function(d) { return y(d.value) })
           )
     }
 
@@ -300,12 +301,11 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases },
         .transition()
         .attr("d", d3.line()
           .x(function(d) { return x(d.date) })
-          .y(function(d) { return y(d.cases) })
+          .y(function(d) { return y(d.value) })
       )
     });
 
 })
-
 
 </script>
     
