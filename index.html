@@ -198,7 +198,7 @@ var svg2 = d3.select("#section2")
           "translate(" + margin.left + "," + margin.top + ")");	
 
 d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", function(d) {
-return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
+return { date : d3.timeParse("%Y-%m-%d")(d.date), cases : d.cases }
   },
 
   function(data) {
@@ -213,9 +213,9 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
 
     // Add Y axis
     var y = d3.scaleLog()
-      .domain( [10, 200000])
+      .domain( [1, 5000000])
       .range([ height, 0 ]);
-    var y_axis = d3.axisLeft(y).ticks(4).tickFormat(d3.format(".0s"));  	
+    var y_axis = d3.axisLeft(y).ticks(5).tickFormat(d3.format(".0s"));  	
     svg2.append("g")
       .call(y_axis);
 
@@ -227,7 +227,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
       .x(function(d) { return x(d.date); })
-      .y(function(d) { return y(d.deaths); })
+      .y(function(d) { return y(d.cases); })
        )
 
     // create a tooltip
@@ -247,7 +247,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
       }
       var mousemove = function(d) {
         Tooltip
-          .html("Exact value: " + d.deaths)
+          .html("Exact value: " + d.cases)
           .style("left", (d3.mouse(this)[0]+70) + "px")
           .style("top", (d3.mouse(this)[1]) + "px")
       }
@@ -263,7 +263,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
       .append("circle")
         .attr("class", "myCircle")
         .attr("cx", function(d) { return x(d.date); } )
-        .attr("cy", function(d) { return y(d.deaths); } )
+        .attr("cy", function(d) { return y(d.cases); } )
         .attr("r", 5)
         .attr("stroke", "#69b3a2")
         .attr("stroke-width", 3)
