@@ -325,7 +325,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
         .x(function(d) { return x(d.date); })
         .y(function(d) { return y(d.likes); });
 
-    var svg = d3.select("section2").append("svg")
+    var svg = d3.select("#section2").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
