@@ -198,7 +198,7 @@ var svg2 = d3.select("#section2")
           "translate(" + margin.left + "," + margin.top + ")");	
 
 d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", function(d) {
-return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
+return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
   },
 
   function(data) {
