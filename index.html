@@ -211,7 +211,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
 
     // Add Y axis
     var y = d3.scaleLog()
-      .domain( [0, 5000000])
+      .domain( [10, 5000000])
       .range([ height, 0 ]);
     svg2.append("g")
       .call(d3.axisLeft(y));
