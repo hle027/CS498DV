@@ -325,12 +325,17 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
 	    .style("font", "20px times")
       .text("Date");
 
-    var y = d3.scaleLog()
-      .domain([1, 200000])
-      .range([ height, 0 ]);
-    var y_axis = d3.axisLeft(y).ticks(5).tickFormat(d3.format(".0s"));  	
-    svg3.append("g")
-      .call(y_axis);
+    //var y = d3.scaleLog()
+      //.domain([1, 200000])
+     // .range([ height, 0 ]);
+    //var y_axis = d3.axisLeft(y).ticks(5).tickFormat(d3.format(".0s"));  
+    var y = d3.scaleLinear()
+     .domain([0, 150000])
+     .range([ height, 0 ]);
+  svg.append("g")
+    .call(d3.axisLeft(y));	
+   // svg3.append("g")
+    //  .call(y_axis);
     svg3.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", margin.left - margin.left - margin.right)
