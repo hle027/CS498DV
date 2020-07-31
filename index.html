@@ -180,29 +180,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     .on("mousemove", moveTooltip )
     .on("mouseleave", hideTooltip )
 
-  var size = 5	
-  var legendHolder = svg.append('g')
-  .attr('transform', "translate(" + (margin.left + width) + ",0)")
 
-  var legend = legendHolder.selectAll(".legend")
-    .data(State)
-  .enter().append("g")
-    .attr("class", "legend")
-    .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
-  legend.append("rect")
-  .attr("x", 100)
-  .attr("y", function(d,i){ return 100 + i*(size+5)})
-  .attr("width", size)
-  .attr("height", size)
-  .style("fill", function(d){ return Color(d)});
-
-  legend.append("text")
-  .attr("x", 100 + size*1.2)
-  .attr("y", function(d,i){ return 100 + i*(size+5) + (size/2)})
-  .style("fill", function(d){ return Color(d)})
-  .attr("text-anchor", "left")	
-  .style("alignment-baseline", "middle");
 
  // var size = 5
  // svg.selectAll("mydots")
