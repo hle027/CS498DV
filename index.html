@@ -181,7 +181,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     .on("mouseleave", hideTooltip )
 })	
 </script>
-<meta charset="utf-8">	
+
 <style>
 .myCircle:hover {
   stroke: black;
@@ -218,16 +218,16 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
     svg2.append("g")
       .call(y_axis);
 
-    // Add the line
-    //svg2.append("path")
-     // .datum(data)
-      //.attr("fill", "none")
-     // .attr("stroke", "black")
-     // .attr("stroke-width", 1.5)
-     // .attr("d", d3.line()
-      //  .x(function(d) { return x(d.date) })
-      //  .y(function(d) { return y(d.deaths) })
-      //  )
+
+    svg2.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "black")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+      .x(function(d) { return x(d.date) })
+      .y(function(d) { return y(d.deaths) })
+       )
 
     // create a tooltip
     var Tooltip = d3.select("#section2")
