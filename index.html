@@ -247,7 +247,8 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), cases : d.cases }
       }
       var mousemove = function(d) {
         Tooltip
-          .html("Exact value: " + d.cases)
+          .html("Total Confirmed Cases: " + d.cases +
+	        "<br />" + "Date: " + d.date)
           .style("left", (d3.mouse(this)[0]+70) + "px")
           .style("top", (d3.mouse(this)[1]) + "px")
       }
