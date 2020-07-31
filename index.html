@@ -182,25 +182,34 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
 })	
 </script>
 
-<style>
-.myCircle:hover {
-  stroke: black;
-}
-</style>	
+	
 <script>
+
+
+//var data2 = [
+  // {ser1: 1, ser2: 7},
+ //  {ser1: 4, ser2: 1},
+ //  {ser1: 6, ser2: 8}
+//];
+
+// set the dimensions and margins of the graph
+//var margin = {top: 10, right: 30, bottom: 30, left: 50},
+    //width = 460 - margin.left - margin.right,
+   // height = 400 - margin.top - margin.bottom;
 var svg2 = d3.select("#section2")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");	
+          "translate(" + margin.left + "," + margin.top + ")");
 
+//Read the data
 d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", function(d) {
 return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
-  },
 
-  function(data) {
+  // Add X axis --> it is a date format
+ //function(data) {
 
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
@@ -218,59 +227,77 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
     svg2.append("g")
       .call(y_axis);
 
+  // This allows to find the closest X index of the mouse:
+  var bisect = d3.bisector(function(d) { return d.date; }).left;
 
-    svg2.append("path")
-      .datum(data)
-      .attr("fill", "none")
+  // Create the circle that travels along the curve of chart
+  var focus = svg
+    .append('g')
+    .append('circle')
+      .style("fill", "none")
       .attr("stroke", "black")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-      .x(function(d) { return x(d.date); })
-      .y(function(d) { return y(d.deaths); })
-       )
-
-    // create a tooltip
-    var Tooltip = d3.select("#section2")
-      .append("div")
+      .attr('r', 8.5)
       .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "white")
-      .style("border", "solid")
-      .style("border-width", "2px")
-      .style("border-radius", "5px")
-      .style("padding", "5px")
-    
-      var mouseover = function(d) {
-        Tooltip
-          .style("opacity", 1)
-      }
-      var mousemove = function(d) {
-        Tooltip
-          .html("Exact value: " + d.deaths)
-          .style("left", (d3.mouse(this)[0]+70) + "px")
-          .style("top", (d3.mouse(this)[1]) + "px")
-      }
-      var mouseleave = function(d) {
-        Tooltip
-          .style("opacity", 0)
-      }
 
-    svg2.append("g")
-      .selectAll("dot")
-      .data(data)
-      .enter()
-      .append("circle")
-        .attr("class", "myCircle")
-        .attr("cx", function(d) { return x(d.date); } )
-        .attr("cy", function(d) { return y(d.deaths); } )
-        .attr("r", 5)
-        .attr("stroke", "#69b3a2")
-        .attr("stroke-width", 3)
-        .attr("fill", "white")
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
-})	
+  // Create the text that travels along the curve of chart
+  var focusText = svg2
+    .append('g')
+    .append('text')
+      .style("opacity", 0)
+      .attr("text-anchor", "left")
+      .attr("alignment-baseline", "middle")
+
+  // Add the line
+  svg2
+    .append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.x) })
+      .y(function(d) { return y(d.y) })
+      )
+
+  // Create a rect on top of the svg area: this rectangle recovers mouse position
+  svg2
+    .append('rect')
+    .style("fill", "none")
+    .style("pointer-events", "all")
+    .attr('width', width)
+    .attr('height', height)
+    .on('mouseover', mouseover)
+    .on('mousemove', mousemove)
+    .on('mouseout', mouseout);
+
+
+  // What happens when the mouse move -> show the annotations at the right positions.
+  function mouseover() {
+    focus.style("opacity", 1)
+    focusText.style("opacity",1)
+  }
+
+  function mousemove() {
+    // recover coordinate we need
+    var x0 = x.invert(d3.mouse(this)[0]);
+    var i = bisect(data, x0, 1);
+    selectedData = data[i]
+    focus
+      .attr("cx", x(selectedData.date))
+      .attr("cy", y(selectedData.cases))
+    focusText
+      .html("x:" + selectedData.date + "  -  " + "y:" + selectedData.cases)
+      .attr("x", x(selectedData.date)+15)
+      .attr("y", y(selectedData.y))
+    }
+  function mouseout() {
+    focus.style("opacity", 0)
+    focusText.style("opacity", 0)
+  }
+
+})
+
+</script>
     
 
 
