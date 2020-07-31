@@ -332,7 +332,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
     var y = d3.scaleLinear()
      .domain([0, 150000])
      .range([ height, 0 ]);
-  svg.append("g")
+   svg3.append("g")
     .call(d3.axisLeft(y));	
    // svg3.append("g")
     //  .call(y_axis);
