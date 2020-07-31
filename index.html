@@ -285,7 +285,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
         stroke: #000;
     }
 
-    .tooltip-date, .tooltip-likes {
+    .tooltip-date, .tooltip-cases {
         font-weight: bold;
     }
 
@@ -330,7 +330,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
 
     var line = d3.svg.line()
         .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.likes); });
+        .y(function(d) { return y(d.cases); });
 
         data.forEach(function(d) {
             d.date = parseDate(d.date);
@@ -416,7 +416,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     });
 
 </script>
-
+</body>
 </html>
 
 
