@@ -225,8 +225,8 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
       .attr("stroke", "black")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
-      .x(function(d) { return x(d.date) })
-      .y(function(d) { return y(d.deaths) })
+      .x(function(d) { return x(d.date); })
+      .y(function(d) { return y(d.deaths); })
        )
 
     // create a tooltip
@@ -255,15 +255,14 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
           .style("opacity", 0)
       }
 
-    svg2
-      .append("g")
+    svg2.append("g")
       .selectAll("dot")
       .data(data)
       .enter()
       .append("circle")
         .attr("class", "myCircle")
-        .attr("cx", function(d) { return x(d.date) } )
-        .attr("cy", function(d) { return y(d.deaths) } )
+        .attr("cx", function(d) { return x(d.date); } )
+        .attr("cy", function(d) { return y(d.deaths); } )
         .attr("r", 5)
         .attr("stroke", "#69b3a2")
         .attr("stroke-width", 3)
