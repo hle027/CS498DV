@@ -79,8 +79,8 @@ $(document).ready(function(){
 }
 </style>
 
-<script>
 
+<script>
 var margin = {top: 40, right: 80, bottom: 100, left: 200},
     width = 1200 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
@@ -241,9 +241,9 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     //  .attr("r", 5)
     //  .style("fill", "#69b3a2")
 
-})
-	
+})	
 </script>
+	
 <style>
 
     body {
@@ -299,7 +299,14 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom,
         tooltip = { width: 100, height: 100, x: 10, y: -30 };
-
+	
+   var svg = d3.select("#section2").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
+   d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", function(error, data) {
     var parseDate = d3.time.format("%m/%e/%Y").parse,
         bisectDate = d3.bisector(function(d) { return d.date; }).left,
         formatValue = d3.format(","),
@@ -324,15 +331,6 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     var line = d3.svg.line()
         .x(function(d) { return x(d.date); })
         .y(function(d) { return y(d.likes); });
-
-    var svg = d3.select("#section2").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", function(error, data) {
-        if (error) throw error;
 
         data.forEach(function(d) {
             d.date = parseDate(d.date);
@@ -393,7 +391,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
             .text("Likes:");
 
         focus.append("text")
-            .attr("class", "tooltip-likes")
+            .attr("class", "tooltip-cases")
             .attr("x", 60)
             .attr("y", 18);
 
@@ -413,13 +411,12 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
                 d = x0 - d0.date > d1.date - x0 ? d1 : d0;
             focus.attr("transform", "translate(" + x(d.date) + "," + y(d.cases) + ")");
             focus.select(".tooltip-date").text(dateFormatter(d.date));
-            focus.select(".tooltip-likes").text(formatValue(d.cases));
+            focus.select(".tooltip-cases").text(formatValue(d.cases));
         }
     });
 
 </script>
 
-</body>
 </html>
 
 
