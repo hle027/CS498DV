@@ -181,6 +181,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     .on("mouseleave", hideTooltip )
 })	
 </script>
+<meta charset="utf-8">	
 <style>
 .myCircle:hover {
   stroke: black;
@@ -188,7 +189,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
 </style>	
 <script>
 var svg2 = d3.select("#section2")
-  .append("svg2")
+  .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -224,7 +225,6 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
       .attr("stroke", "black")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
-        .curve(d3.curveBasis) 
         .x(function(d) { return x(d.date) })
         .y(function(d) { return y(d.deaths) })
         )
