@@ -270,7 +270,6 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
     .on('mousemove', mousemove)
     .on('mouseout', mouseout);
 
- }
   // What happens when the mouse move -> show the annotations at the right positions.
   function mouseover() {
     focus.style("opacity", 1)
@@ -289,7 +288,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
       .html("x:" + selectedData.date + "  -  " + "y:" + selectedData.cases)
       .attr("x", x(selectedData.date)+15)
       .attr("y", y(selectedData.y))
-    
+  }  
   function mouseout() {
     focus.style("opacity", 0)
     focusText.style("opacity", 0)
