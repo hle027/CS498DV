@@ -192,7 +192,7 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
 
 // append the svg object to the body of the page
 var svg2 = d3.select("#selection2")
-  .append("svg")
+  .append("svg2")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -226,9 +226,9 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
       .call(d3.axisLeft(y));
 
     // Add a clipPath: everything out of this area won't be drawn.
-    var clip = svg2.append("defs").append("svg:clipPath")
+    var clip = svg2.append("defs").append("svg2:clipPath")
         .attr("id", "clip")
-        .append("svg:rect")
+        .append("svg2:rect")
         .attr("width", width )
         .attr("height", height )
         .attr("x", 0)
