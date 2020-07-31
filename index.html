@@ -264,7 +264,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
         .attr("class", "myCircle")
         .attr("cx", function(d) { return x(d.date) } )
         .attr("cy", function(d) { return y(d.cases) } )
-        .attr("r", 8)
+        .attr("r", 5)
         .attr("stroke", "#69b3a2")
         .attr("stroke-width", 3)
         .attr("fill", "white")
