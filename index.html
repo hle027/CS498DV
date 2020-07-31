@@ -213,8 +213,9 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
     var y = d3.scaleLog()
       .domain( [10, 5000000])
       .range([ height, 0 ]);
+    var y_axis = d3.axisLeft(y).ticks(4).tickFormat(d3.format(".0s"));  	
     svg2.append("g")
-      .call(d3.axisLeft(y));
+      .call(y_axis);
 
     // Add the line
     svg2.append("path")
