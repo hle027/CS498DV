@@ -326,7 +326,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
       .text("Date");
 
     var y = d3.scaleLog()
-      .domain([-1, 200000])
+      .domain([1, 200000])
       .range([ height, 0 ]);
     var y_axis = d3.axisLeft(y).ticks(5).tickFormat(d3.format(".0s"));  	
     svg3.append("g")
