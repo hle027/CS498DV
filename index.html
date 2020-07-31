@@ -231,7 +231,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
   var bisect = d3.bisector(function(d) { return d.date; }).left;
 
   // Create the circle that travels along the curve of chart
-  var focus = svg
+  var focus = svg2
     .append('g')
     .append('circle')
       .style("fill", "none")
