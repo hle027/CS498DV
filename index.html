@@ -195,11 +195,10 @@ var svg2 = d3.select("#section2")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");	
 
-d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", function(d) {
 return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
   },
 
-  // Now I can use this dataset:
   function(data) {
 
     // Add X axis --> it is a date format
@@ -239,8 +238,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
       .style("border-width", "2px")
       .style("border-radius", "5px")
       .style("padding", "5px")
-
-      // Three function that change the tooltip when user hover / move / leave a cell
+    
       var mouseover = function(d) {
         Tooltip
           .style("opacity", 1)
