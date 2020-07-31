@@ -209,7 +209,7 @@ d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", 
 return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
 
   // Add X axis --> it is a date format
- function(data) {
+ //function(data) {
 
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
@@ -289,7 +289,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
       .html("x:" + selectedData.date + "  -  " + "y:" + selectedData.cases)
       .attr("x", x(selectedData.date)+15)
       .attr("y", y(selectedData.y))
-    }
+    
   function mouseout() {
     focus.style("opacity", 0)
     focusText.style("opacity", 0)
