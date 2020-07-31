@@ -206,7 +206,7 @@ var svg2 = d3.select("#section2")
 
 //Read the data
 d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", function(d) {
-return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
+return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.cases }
 
   // Add X axis --> it is a date format
  function(data) {
@@ -221,7 +221,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
 
     // Add Y axis
     var y = d3.scaleLog()
-      .domain( [10, 200000])
+      .domain( [10, 5000000])
       .range([ height, 0 ]);
     var y_axis = d3.axisLeft(y).ticks(4).tickFormat(d3.format(".0s"));  	
     svg2.append("g")
@@ -255,8 +255,8 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
     .attr("stroke", "steelblue")
     .attr("stroke-width", 1.5)
     .attr("d", d3.line()
-      .x(function(d) { return x(d.x) })
-      .y(function(d) { return y(d.y) })
+      .x(function(d) { return x(d.date) })
+      .y(function(d) { return y(d.cases) })
       )
 
   // Create a rect on top of the svg area: this rectangle recovers mouse position
