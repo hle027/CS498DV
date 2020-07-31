@@ -209,7 +209,7 @@ d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", 
 return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
 
   // Add X axis --> it is a date format
- //function(data) {
+ function(data) {
 
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
@@ -270,7 +270,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.deaths }
     .on('mousemove', mousemove)
     .on('mouseout', mouseout);
 
-
+ }
   // What happens when the mouse move -> show the annotations at the right positions.
   function mouseover() {
     focus.style("opacity", 1)
