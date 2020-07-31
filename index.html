@@ -210,15 +210,28 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), cases : d.cases }
     svg2.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
+    svg2.append("text")
+      .attr("transform",
+            "translate(" + (width/2) + " ," + 
+                           (height + margin.top) + ")")
+      .style("text-anchor", "middle")
+	    .style("font", "20px times")
+      .text("Confirmed Cases");
 
-    // Add Y axis
     var y = d3.scaleLog()
       .domain( [1, 5000000])
       .range([ height, 0 ]);
     var y_axis = d3.axisLeft(y).ticks(5).tickFormat(d3.format(".0s"));  	
     svg2.append("g")
       .call(y_axis);
-
+    svg2.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", margin.left - margin.left - margin.right)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+	    .style("font", "20px times")
+      .text("Date")
 
     svg2.append("path")
       .datum(data)
@@ -248,7 +261,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), cases : d.cases }
       var mousemove = function(d) {
         Tooltip
           .html("Total Confirmed Cases: " + d.cases +
-	        "<br />" + "Date: " +  d3.timeParse("%Y-%m-%d")(d.date))
+	        "<br />" + "Date: " +  d.date)
           .style("left", (d3.mouse(this)[0]+70) + "px")
           .style("top", (d3.mouse(this)[1]) + "px")
       }
