@@ -367,7 +367,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
     .append("path")
     .datum(data)
     .attr("fill", "none")
-    .attr("stroke", "dark orange")
+    .attr("stroke", "darkorange")
     .attr("stroke-width", 3)
     .attr("d", d3.line()
       .x(function(d) { return x(d.date) })
