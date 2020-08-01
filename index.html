@@ -399,8 +399,10 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
       focusText
       .html("Date: " + selectedData.date +
 	     "<br />" + "Total Deaths: " + selectedData.deaths)
-      .attr("x", x(selectedData.date)+15)
-      .attr("y", y(selectedData.deaths))
+      .style("left", (d3.mouse(this)[0]+70) + "px")
+      .style("top", (d3.mouse(this)[1]) + "px")   
+      //.attr("x", x(selectedData.date)+15)
+     // .attr("y", y(selectedData.deaths))
     }
   function mouseout() {
     focus.style("opacity", 0)
