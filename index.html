@@ -243,9 +243,8 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), cases : d.cases }
       .y(function(d) { return y(d.cases); })
        )
 
-    // create a tooltip
     var Tooltip = d3.select("#section2")
-      .append("g")
+      .append("div")
       .style("opacity", 0)
       .attr("class", "tooltip")
       .style("background-color", "white")
@@ -312,7 +311,6 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
 
   function(data) {
 
-    // Add X axis --> it is a date format
     var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.date; }))
       .range([ 0, width ]);
@@ -333,8 +331,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
      .range([ height, 0 ]);
    svg3.append("g")
     .call(d3.axisLeft(y));	
-   // svg3.append("g")
-    //  .call(y_axis);
+
     svg3.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", margin.left - margin.left - margin.right)
@@ -346,7 +343,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
 	
    var bisect = d3.bisector(function(d) { return d.date; }).left;
 
-  // Create the circle that travels along the curve of chart
+
    var focus = svg3
     .append('g')
     .append('circle')
@@ -355,7 +352,6 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
       .attr('r', 8.5)
       .style("opacity", 0)
 
-  // Create the text that travels along the curve of chart
    var focusText = svg3
     .append('g')
     .append('text')
@@ -401,8 +397,6 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
 	     "<br />" + " Total Deaths: " + selectedData.deaths)
       .style("left", (d3.mouse(this)[0]+60) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")   
-      //.attr("x", x(selectedData.date)+15)
-     // .attr("y", y(selectedData.deaths))
     }
   function mouseout() {
     focus.style("opacity", 0)
