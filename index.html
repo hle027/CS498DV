@@ -386,7 +386,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
       .selectAll("dot")
       .data(data)
       .enter()
-      .append("circle")
+      .append("g")
         .attr("class", "myCircle")
         .attr("cx", function(d) { return x(d.date); } )
         .attr("cy", function(d) { return y(d.deaths); } )
