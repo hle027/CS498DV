@@ -357,7 +357,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
  
 	
      var Tooltip = d3.select("#section3")
-      .append("div")
+      .append("circle")
       .style("opacity", 0)
       .attr("class", "tooltip")
       .style("background-color", "white")
