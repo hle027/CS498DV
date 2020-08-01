@@ -418,14 +418,6 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
     focus.style("opacity", 0)
     focusText.style("opacity", 0)
   }
-	
- svg3.append("text")
-        .attr("x", (width / 2))             
-        .attr("y", 0 - (margin.bottom / 2))
-        .attr("text-anchor", "middle")  
-        .style("font-size", "26px") 
-        .style("text-decoration", "underline")  
-        .text("Total Covid-19 Related Deaths in the US");
 })	
 
 </script>
