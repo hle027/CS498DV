@@ -179,11 +179,12 @@ d3.csv("https://raw.githubusercontent.com/hle027/CS498DV/master/us-states.csv", 
     .on("mouseover", showTooltip )
     .on("mousemove", moveTooltip )
     .on("mouseleave", hideTooltip )
+	
   svg.append("text")
         .attr("x", (width / 2))             
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")  
-        .style("font-size", "30px") 
+        .style("font-size", "26px") 
         .style("text-decoration", "underline")  
         .text("United States Covid-19 Cases and Deaths by State");	
 })	
@@ -291,6 +292,14 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), cases : d.cases }
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
+	
+    svg2.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "26px") 
+        .style("text-decoration", "underline")  
+        .text("Confirmed Covid-19 Cases in the US");	
 })	
 
 </script>
@@ -386,6 +395,14 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
     .on('mouseover', mouseover)
     .on('mousemove', mousemove)
     .on('mouseleave', mouseleave);
+	
+  svg3.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "26px") 
+        .style("text-decoration", "underline")  
+        .text("Total Covid-19 Related Deaths in the US");		
 
    function mouseover() {
        focus.style("opacity", 1)
