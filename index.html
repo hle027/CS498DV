@@ -245,7 +245,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), cases : d.cases }
 
     // create a tooltip
     var Tooltip = d3.select("#section2")
-      .append("div")
+      .append("g")
       .style("opacity", 0)
       .attr("class", "tooltip")
       .style("background-color", "white")
