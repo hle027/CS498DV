@@ -343,55 +343,68 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
       .style("text-anchor", "middle")
 	    .style("font", "20px times")
       .text("Total Deaths")
-
-    svg3.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "darkorange")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-      .x(function(d) { return x(d.date); })
-      .y(function(d) { return y(d.deaths); })
-       )
-
- 
 	
-     var Tooltip = d3.select("#section3")
-      .append("circle")
+   var bisect = d3.bisector(function(d) { return d.date; }).left;
+
+  // Create the circle that travels along the curve of chart
+   var focus = svg3
+    .append('g')
+    .append('circle')
+      .style("fill", "none")
+      .attr("stroke", "black")
+      .attr('r', 8.5)
       .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "white")
-      .style("border", "solid")
-      .style("border-width", "2px")
-      .style("border-radius", "5px")
-      .style("padding", "5px")
-    
-      var mouseover = function(d) {
-        Tooltip
-          .style("opacity", 1)
-      }
-      var mousemove = function(d) {
-        Tooltip
-          .html("Total Deaths: " + d.deaths +
-	        "<br />" + "Date: " +  d.date)
-          .style("left", (d3.mouse(this)[0] + 70) + "px")
-          .style("top", (d3.mouse(this)[1]) + "px")
-      }
-      var mouseleave = function(d) {
-        Tooltip
-          .style("opacity", 0)
-      }
-      svg3
-       .append('rect')
-       .style("fill", "none")
-       .style("pointer-events", "all")
-       .attr('width', width)
-       .attr('height', height)
-       .on('mouseover', mouseover)
-       .on('mousemove', mousemove)
-       .on('mouseleave', mouseleave);
 
+  // Create the text that travels along the curve of chart
+   var focusText = svg3
+    .append('g')
+    .append('text')
+      .style("opacity", 0)
+      .attr("text-anchor", "left")
+      .attr("alignment-baseline", "middle")
+   
+   svg3
+    .append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.date) })
+      .y(function(d) { return y(d.deaths) })
+      )
+	
+   svg3
+    .append('rect')
+    .style("fill", "none")
+    .style("pointer-events", "all")
+    .attr('width', width)
+    .attr('height', height)
+    .on('mouseover', mouseover)
+    .on('mousemove', mousemove)
+    .on('mouseleave', mouseleave);
 
+   function mouseover() {
+       focus.style("opacity", 1)
+       focusText.style("opacity",1)
+  }
+
+   function mousemove() {
+        var x0 = x.invert(d3.mouse(this)[0]);
+        var i = bisect(data, x0, 1);
+        selectedData = data[i]
+      focus
+        .attr("cx", x(selectedData.date))
+        .attr("cy", y(selectedData.deaths))
+      focusText
+      .html("x:" + selectedData.date + "  -  " + "y:" + selectedData.deaths)
+      .attr("x", x(selectedData.date)+15)
+      .attr("y", y(selectedData.deaths))
+    }
+  function mouseout() {
+    focus.style("opacity", 0)
+    focusText.style("opacity", 0)
+  }
  
 })	
 
