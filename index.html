@@ -347,7 +347,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
     svg3.append("path")
       .datum(data)
       .attr("fill", "none")
-      .attr("stroke", "black")
+      .attr("stroke", "darkorange")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
       .x(function(d) { return x(d.date); })
@@ -381,21 +381,18 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
         Tooltip
           .style("opacity", 0)
       }
+      svg3
+       .append('rect')
+       .style("fill", "none")
+       .style("pointer-events", "all")
+       .attr('width', width)
+       .attr('height', height)
+       .on('mouseover', mouseover)
+       .on('mousemove', mousemove)
+       .on('mouseleave', mouseleave);
 
-  svg3.append("g")
-      .selectAll("dot")
-      .data(data)
-      .enter()
-        .attr("class", "myCircle")
-        .attr("cx", function(d) { return x(d.date); } )
-        .attr("cy", function(d) { return y(d.deaths); } )
-        .attr("r", 5)
-        .attr("stroke", "#69b3a2")
-        .attr("stroke-width", 3)
-        .attr("fill", "white")
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
+
+ 
 })	
 
 </script>
