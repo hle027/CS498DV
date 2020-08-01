@@ -289,53 +289,13 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), cases : d.cases }
 
 </script>
     
-
 <style>
-
-    body {
-        font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-
-    .axis path,
-    .axis line {
-        fill: none;
-        stroke: #000;
-        shape-rendering: crispEdges;
-    }
-
-    .x.axis path {
-        display: none;
-    }
-
-    .line {
-        fill: none;
-        stroke: steelblue;
-        stroke-width: 1.5px;
-    }
-
-    .overlay {
-        fill: none;
-        pointer-events: all;
-    }
-
-    .focus circle {
-        fill: steelblue;
-    }
-
-    .focus text {
-        font-size: 14px;
-    }
-
-    .tooltip {
-        fill: white;
-        stroke: #000;
-    }
-
-    .tooltip-date, .tooltip-likes {
-        font-weight: bold;
-    }
+.myCircle:hover {
+  stroke: black;
+}
 
 </style>
+
 	
 <script>
 var svg3 = d3.select("#section3")
@@ -394,22 +354,12 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
       .y(function(d) { return y(d.deaths); })
        )
 
-    // create a tooltip
-    var Tooltip = svg3.append("g")
-      .attr("class", "tooltip")
-      .style("display", "none");
+ 
 	
-    Tooltip.append("circle")
-      .attr("r", 5);
-	
-     Tooltip.append("rect")
+     var Tooltip = d3.select("#section3")
+      .append("div")
+      .style("opacity", 0)
       .attr("class", "tooltip")
-      .attr("width", 100)
-      .attr("height", 50)
-      .attr("x", 10)
-      .attr("y", -22)
-      .attr("rx", 4)
-      .attr("ry", 4);	
       .style("background-color", "white")
       .style("border", "solid")
       .style("border-width", "2px")
@@ -432,10 +382,18 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
           .style("opacity", 0)
       }
 
-    svg3.append("rect")
-        .attr("class", "overlay")
-        .attr("width", width)
-        .attr("height", height)
+  svg3.append("g")
+      .selectAll("dot")
+      .data(data)
+      .enter()
+      .append("circle")
+        .attr("class", "myCircle")
+        .attr("cx", function(d) { return x(d.date); } )
+        .attr("cy", function(d) { return y(d.deaths); } )
+        .attr("r", 5)
+        .attr("stroke", "#69b3a2")
+        .attr("stroke-width", 3)
+        .attr("fill", "white")
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
