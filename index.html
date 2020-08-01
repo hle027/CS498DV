@@ -43,7 +43,7 @@ $(document).ready(function(){
 <h1>Data Visualization - Final Project</h1>
 
 <div class="main" id="section1">
-  <h2>Section 1. Corona cases across the States</h2>
+  <h2>Section 1. Overview Look of Corona cases across the States</h2>
   <p>Click on the links below to scroll down to Section 2 or Section 3.</p>
   <a href="#section2">Section 2</a>
   <a href="#section3">Section 3</a>
@@ -51,14 +51,14 @@ $(document).ready(function(){
 </div>
 
 <div class="main" id="section2">
-  <h2>Section 2</h2>
+  <h2>Section 2 The Covid-19 Trend in the United States (constantly updating)</h2>
   <p>Click on the links below to scroll up to Section 1 or scroll down to section 3.</p>
   <a href="#section1">Section 1</a>
   <a href="#section3">Section 3</a>	
 </div>
 	
 <div class="main" id="section3">
-  <h2>Section 3</h2>
+  <h2>Section 3 The Total Death Related to Covid-19 in the United States (updating everyday)</h2>
   <p>Click on the links below to scroll up to Section 1 or Section 2.</p>
   <a href="#section1">Section 1</a>
   <a href="#section2">Section 2</a>	
@@ -395,14 +395,7 @@ return { date : d3.timeParse("%Y-%m-%d")(d.date), deaths : d.deaths }
     .on('mouseover', mouseover)
     .on('mousemove', mousemove)
     .on('mouseleave', mouseleave);
-	
-  svg3.append("text")
-        .attr("x", (width / 2))             
-        .attr("y", 0 - (margin.top / 2))
-        .attr("text-anchor", "middle")  
-        .style("font-size", "26px") 
-        .style("text-decoration", "underline")  
-        .text("Total Covid-19 Related Deaths in the US");		
+		
 
    function mouseover() {
        focus.style("opacity", 1)
