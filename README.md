@@ -1,4 +1,4 @@
-# CS498DV
+# Data Visualization Of Covid-19
 
 # Introduction
 Recent news stated that the COVID-19 cases showing a slowdown trend. After examining different charts and data, this doesn’t seem to be the case. The purpose of my Github page is to track the COVID-19 cases in the United States specifically. As a stock trader, I have always believed that the charts always tell the story and I never depend 100% on what people are saying about certain events. As users, you can see information regarding confirmed cases and total deaths in each State. The data that I used is constantly updated every day so the users can always come back and see the trend.
